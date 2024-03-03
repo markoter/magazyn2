@@ -8,13 +8,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MyTest extends AbstractController
 {
-    #[Route('lucky/test')]
+    #[Route('lucky/myTest')]
     public function someTest():Response
     {
         $ktore = random_int(0,3);
         $odpowiedzi = ['pierwsza', "druga", 'trzecia', 'czwarta'];
-        return new Response(
-            '<html><body> Wybrano odpowiedź: ' .$odpowiedzi[$ktore]. '</body></html>'
-        );
+        $wybor = $odpowiedzi[$ktore];
+        // return new Response(
+        //     '<html><body> Wybrano odpowiedź: ' .$odpowiedzi[$ktore]. '</body></html>'
+        // );
+        return $this->render('lucky/myTest.html.twig', [
+            'wybor' => $wybor,
+        ]);
     }
 }
