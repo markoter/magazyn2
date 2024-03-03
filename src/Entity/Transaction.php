@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TransactionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +33,14 @@ class Transaction
 
     #[ORM\ManyToOne(inversedBy: 'transactions')]
     private ?Warehouse $warehouse = null;
+
+    #[ORM\OneToMany(targetEntity: InvoiceFile::class, mappedBy: 'transaction')]
+    private Collection $invoiceFiles;
+
+    public function __construct()
+    {
+        $this->invoiceFiles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,6 +115,36 @@ class Transaction
     public function setWarehouse(?Warehouse $warehouse): static
     {
         $this->warehouse = $warehouse;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, InvoiceFile>
+     */
+    public function getInvoiceFiles(): Collection
+    {
+        return $this->invoiceFiles;
+    }
+
+    public function addInvoiceFile(InvoiceFile $invoiceFile): static
+    {
+        if (!$this->invoiceFiles->contains($invoiceFile)) {
+            $this->invoiceFiles->add($invoiceFile);
+            $invoiceFile->setTransaction($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoiceFile(InvoiceFile $invoiceFile): static
+    {
+        if ($this->invoiceFiles->removeElement($invoiceFile)) {
+            // set the owning side to null (unless already changed)
+            if ($invoiceFile->getTransaction() === $this) {
+                $invoiceFile->setTransaction(null);
+            }
+        }
 
         return $this;
     }
