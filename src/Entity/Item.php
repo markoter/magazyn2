@@ -33,9 +33,13 @@ class Item
     #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'item')]
     private Collection $transactions;
 
+    #[ORM\ManyToMany(targetEntity: Warehouse::class, inversedBy: 'items')]
+    private Collection $warehouses;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
+        $this->warehouses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +133,30 @@ class Item
                 $transaction->setItem(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Warehouse>
+     */
+    public function getWarehouses(): Collection
+    {
+        return $this->warehouses;
+    }
+
+    public function addWarehouse(Warehouse $warehouse): static
+    {
+        if (!$this->warehouses->contains($warehouse)) {
+            $this->warehouses->add($warehouse);
+        }
+
+        return $this;
+    }
+
+    public function removeWarehouse(Warehouse $warehouse): static
+    {
+        $this->warehouses->removeElement($warehouse);
 
         return $this;
     }
