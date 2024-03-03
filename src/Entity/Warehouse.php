@@ -24,9 +24,13 @@ class Warehouse
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'warehouse')]
     private Collection $users;
 
+    #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'warehouse')]
+    private Collection $transactions;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,6 +86,36 @@ class Warehouse
             // set the owning side to null (unless already changed)
             if ($user->getWarehouse() === $this) {
                 $user->setWarehouse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Transaction>
+     */
+    public function getTransactions(): Collection
+    {
+        return $this->transactions;
+    }
+
+    public function addTransaction(Transaction $transaction): static
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions->add($transaction);
+            $transaction->setWarehouse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransaction(Transaction $transaction): static
+    {
+        if ($this->transactions->removeElement($transaction)) {
+            // set the owning side to null (unless already changed)
+            if ($transaction->getWarehouse() === $this) {
+                $transaction->setWarehouse(null);
             }
         }
 
