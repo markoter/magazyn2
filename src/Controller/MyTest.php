@@ -12,7 +12,7 @@ class MyTest extends AbstractController
     public function someTest():Response
     {
         $ktore = random_int(0,3);
-        $odpowiedzi = ['pierwsza', "druga", 'trzecia', 'czwarta'];
+        $odpowiedzi = ['pierwszy', "drugi", 'trzeci', 'czwarty'];
         $wybor = $odpowiedzi[$ktore];
         // return new Response(
         //     '<html><body> Wybrano odpowiedź: ' .$odpowiedzi[$ktore]. '</body></html>'
