@@ -19,6 +19,10 @@ class Invoice
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $file_type = null;
 
+    #[ORM\ManyToOne(inversedBy: 'invoices')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Transaction $transaction = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class Invoice
     public function setFileType(?string $file_type): static
     {
         $this->file_type = $file_type;
+
+        return $this;
+    }
+
+    public function getTransaction(): ?Transaction
+    {
+        return $this->transaction;
+    }
+
+    public function setTransaction(?Transaction $transaction): static
+    {
+        $this->transaction = $transaction;
 
         return $this;
     }
