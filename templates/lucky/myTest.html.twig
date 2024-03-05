@@ -1,2 +1,5 @@
 {# templates/lucky/myTest.html.twig #}
-<h1 style="color: red;">Wybrałeś {{ wybor}} element</h1>
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1 style="color: red;">Wylosowałeś {{ wybor}} element</h1>
+{% endblock %}
