@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-        <h1>{% block header %}My App{% endblock %}</h1>
+        <h1>{% block header %}Warehouse Manager{% endblock %}</h1>
         <div>
         {% if app.user %}
             Logged in as: {{ app.user.username }}
@@ -30,7 +30,7 @@
     </div>
 
     <footer>
-        {% block footer %}Copyright &copy; {{ "now"|date("Y") }} My App{% endblock %}
+        {% block footer %}Copyright &copy; {{ "now"|date("Y") }} markoter {% endblock %}
     </footer>
 
     {% block javascripts %}{% endblock %}
