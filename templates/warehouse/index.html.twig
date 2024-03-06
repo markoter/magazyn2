@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Assigned users</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +19,13 @@
             <tr>
                 <td>{{ warehouse.id }}</td>
                 <td>{{ warehouse.name }}</td>
+                <td>
+                    {% for user in warehouse.users %}
+                        {{ user.username }}{% if not loop.last %}, {% endif %}
+                    {% else %}
+                        No users assigned.
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('app_warehouse_show', {'id': warehouse.id}) }}">show</a>
                     <a href="{{ path('app_warehouse_edit', {'id': warehouse.id}) }}">edit</a>

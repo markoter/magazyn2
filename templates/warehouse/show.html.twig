@@ -15,6 +15,15 @@
                 <th>Name</th>
                 <td>{{ warehouse.name }}</td>
             </tr>
+            <tr>
+                <th>Users</th>
+                <td>{% for user in warehouse.users %}
+                    {{ user.username }}
+                    {% else %}
+                        No users assigned.
+                    {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 

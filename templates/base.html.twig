@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome to My App{% endblock %}</title>
-    <link rel="icon" href="/path/to/favicon.ico">
+    <link rel="icon" href="/ware.ico">
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
         header { background: #007bff; color: #ffffff; padding: 10px 20px; text-align: center; }
         .container { padding: 20px; }
         footer { background: #333; color: #ffffff; text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%; }
+        a:hover {color: #2e4053}
     </style>
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
     <header>
-        <h1>{% block header %}My App{% endblock %}</h1>
+        <h1>
+            <a href="{{ path('app_main') }}">
+                {% block header %}Warehouse Manager{% endblock %}
+            </a>
+        </h1>
         <div>
         {% if app.user %}
-            Logged in as: {{ app.user.username }}
+            Logged in as: {{ app.user.username }} {% if is_granted('ROLE_ADMIN') %}🫡 {% endif %}
             <a href="{{ path('app_logout') }}" style="color: #fff; margin-left: 20px;">Logout</a>
         {% else %}
             <a href="{{ path('app_login') }}" style="color: #fff;">Login</a>
@@ -30,7 +35,7 @@
     </div>
 
     <footer>
-        {% block footer %}Copyright &copy; {{ "now"|date("Y") }} My App{% endblock %}
+        {% block footer %}Copyright &copy; {{ "now"|date("Y") }} markoter {% endblock %}
     </footer>
 
     {% block javascripts %}{% endblock %}
