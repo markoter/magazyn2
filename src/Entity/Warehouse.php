@@ -22,7 +22,7 @@ class Warehouse
     private Collection $transactions;
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'warehouses')]
-    private Collection $users;
+    private ?Collection $users = null;
 
     public function __construct()
     {
@@ -80,7 +80,7 @@ class Warehouse
     /**
      * @return Collection<int, User>
      */
-    public function getUsers(): Collection
+    public function getUsers(): ?Collection
     {
         return $this->users;
     }

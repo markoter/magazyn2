@@ -28,7 +28,7 @@ class User
     private Collection $transactions;
 
     #[ORM\ManyToMany(targetEntity: Warehouse::class, inversedBy: 'users')]
-    private Collection $warehouses;
+    private ?Collection $warehouses = null;
 
     public function __construct()
     {
@@ -110,7 +110,7 @@ class User
     /**
      * @return Collection<int, Warehouse>
      */
-    public function getWarehouses(): Collection
+    public function getWarehouses(): ?Collection
     {
         return $this->warehouses;
     }

@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        <style>
-            .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-            .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-        </style>
-        {% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome to My App{% endblock %}</title>
+    <link rel="icon" href="/path/to/favicon.ico">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
+        header { background: #007bff; color: #ffffff; padding: 10px 20px; text-align: center; }
+        .container { padding: 20px; }
+        footer { background: #333; color: #ffffff; text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%; }
+    </style>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>{% block header %}My App{% endblock %}</h1>
+    </header>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
+    <div class="container">
         {% block body %}{% endblock %}
-    </body>
+    </div>
+
+    <footer>
+        {% block footer %}Copyright &copy; {{ "now"|date("Y") }} My App{% endblock %}
+    </footer>
+
+    {% block javascripts %}{% endblock %}
+</body>
 </html>
