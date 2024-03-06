@@ -9,12 +9,17 @@
         header { background: #007bff; color: #ffffff; padding: 10px 20px; text-align: center; }
         .container { padding: 20px; }
         footer { background: #333; color: #ffffff; text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%; }
+        a:hover {color: #2e4053}
     </style>
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
     <header>
-        <h1>{% block header %}Warehouse Manager{% endblock %}</h1>
+        <h1>
+            <a href="{{ path('app_main') }}">
+                {% block header %}Warehouse Manager{% endblock %}
+            </a>
+        </h1>
         <div>
         {% if app.user %}
             Logged in as: {{ app.user.username }}
