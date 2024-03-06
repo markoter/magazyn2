@@ -14,14 +14,13 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('login')
+            ->add('username')
+            ->add('roles')
             ->add('password')
-            ->add('is_admin')
             ->add('warehouses', EntityType::class, [
                 'class' => Warehouse::class,
-'choice_label' => 'name',
+'choice_label' => 'id',
 'multiple' => true,
-'required' => false,
             ])
         ;
     }
