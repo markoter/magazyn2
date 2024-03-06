@@ -23,24 +23,27 @@ class TransactionController extends AbstractController
     }
 
     #[Route('/new', name: 'app_transaction_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $transaction = new Transaction();
-        $form = $this->createForm(TransactionType::class, $transaction);
-        $form->handleRequest($request);
+public function new(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $transaction = new Transaction();
+    $form = $this->createForm(TransactionType::class, $transaction);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($transaction);
-            $entityManager->flush();
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Set the user to the currently logged-in user
+        $transaction->setUser($this->getUser());
+        
+        $entityManager->persist($transaction);
+        $entityManager->flush();
 
-            return $this->redirectToRoute('app_transaction_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('transaction/new.html.twig', [
-            'transaction' => $transaction,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('app_transaction_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    return $this->render('transaction/new.html.twig', [
+        'transaction' => $transaction,
+        'form' => $form,
+    ]);
+}
 
     #[Route('/{id}', name: 'app_transaction_show', methods: ['GET'])]
     public function show(Transaction $transaction): Response

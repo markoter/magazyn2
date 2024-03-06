@@ -16,22 +16,22 @@ class TransactionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('quantity')
             ->add('is_in')
+            ->add('quantity')
             ->add('vat')
             ->add('unit_price')
-            ->add('transaction_date')
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'id',
-            ])
+            // ->add('transaction_date')
+//             ->add('user', EntityType::class, [
+//                 'class' => User::class,
+// 'choice_label' => 'username',
+//             ])
             ->add('warehouse', EntityType::class, [
                 'class' => Warehouse::class,
-'choice_label' => 'id',
+'choice_label' => 'name',
             ])
             ->add('article', EntityType::class, [
                 'class' => Article::class,
-'choice_label' => 'id',
+'choice_label' => 'name',
             ])
         ;
     }
