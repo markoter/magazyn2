@@ -22,28 +22,44 @@ class TransactionController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_transaction_new', methods: ['GET', 'POST'])]
-public function new(Request $request, EntityManagerInterface $entityManager): Response
-{
-    $transaction = new Transaction();
-    $form = $this->createForm(TransactionType::class, $transaction);
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Set the user to the currently logged-in user
-        $transaction->setUser($this->getUser());
-        
-        $entityManager->persist($transaction);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_transaction_index', [], Response::HTTP_SEE_OTHER);
+    #[Route('/new/in', name: 'app_transaction_new_in', methods: ['GET', 'POST'])]
+    public function newIn(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        return $this -> new($request, $entityManager, true);
     }
 
-    return $this->render('transaction/new.html.twig', [
-        'transaction' => $transaction,
-        'form' => $form,
-    ]);
-}
+    #[Route('/new/out', name: 'app_transaction_new_out', methods: ['GET', 'POST'])]
+    public function newOut(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        return $this -> new($request, $entityManager, false);
+    }
+
+    #[Route('/new', name: 'app_transaction_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, bool $is_in): Response
+    {
+        $transaction = new Transaction();
+        $transaction->setIsIn($is_in);
+        $form = $this->createForm(TransactionType::class, $transaction, [
+            'is_in' => $is_in,
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Set the user to the currently logged-in user
+            $transaction->setUser($this->getUser());
+
+            $entityManager->persist($transaction);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_transaction_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('transaction/new.html.twig', [
+            'transaction' => $transaction,
+            'form' => $form,
+            'transactionType'=> $is_in ? 'Incoming' : 'Outgoing',
+        ]);
+    }
 
     #[Route('/{id}', name: 'app_transaction_show', methods: ['GET'])]
     public function show(Transaction $transaction): Response
@@ -74,7 +90,7 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
     #[Route('/{id}', name: 'app_transaction_delete', methods: ['POST'])]
     public function delete(Request $request, Transaction $transaction, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$transaction->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $transaction->getId(), $request->request->get('_token'))) {
             $entityManager->remove($transaction);
             $entityManager->flush();
         }

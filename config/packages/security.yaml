@@ -43,6 +43,8 @@ security:
         # only admin:
         - { path: ^/user, roles: ROLE_ADMIN }
         - { path: ^/article, roles: ROLE_ADMIN }
+        - { path: ^/transaction/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/warehouse/\d+/edit, roles: ROLE_ADMIN }
 
         # only user:
         - { path: ^/warehouse, roles: ROLE_USER }

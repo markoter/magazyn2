@@ -12,8 +12,8 @@
                 <td>{{ transaction.isIn ? 'In' : 'Out' }}</td>
             </tr>
             <tr>
-                <th>Id</th>
-                <td>{{ transaction.id }}</td>
+                <th>Article</th>
+                <td>{{ transaction.article.name }}</td>
             </tr>
             <tr>
                 <th>Quantity</th>
@@ -25,11 +25,11 @@
                 <td>{{ transaction.vat }}</td>
             </tr>
             <tr>
-                <th>Unit_price</th>
+                <th>Price_per_unit</th>
                 <td>{{ transaction.unitPrice }}</td>
             </tr>
             <tr>
-                <th>Transaction_date</th>
+                <th>Transaction_Date</th>
                 <td>{{ transaction.transactionDate ? transaction.transactionDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
@@ -40,8 +40,9 @@
     </table>
 
     <a href="{{ path('app_transaction_index') }}">back to list</a>
-
-    <a href="{{ path('app_transaction_edit', {'id': transaction.id}) }}">edit</a>
-
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_transaction_edit', {'id': transaction.id}) }}">edit</a>
+    
     {{ include('transaction/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}

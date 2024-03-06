@@ -39,7 +39,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
-
+    public function findWarehousesByUser(User $user)
+    {
+        $entityManager = $this->getEntityManager();
+    
+        $query = $entityManager->createQuery(
+            'SELECT w FROM App\Entity\Warehouse w
+            JOIN w.users u
+            WHERE u.id = :userId'
+        )->setParameter('userId', $user->getId());
+    
+        return $query->getResult();
+    }
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */
