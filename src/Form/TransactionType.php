@@ -20,7 +20,7 @@ class TransactionType extends AbstractType
             ->add('is_in')
             ->add('vat')
             ->add('unit_price')
-            ->add('transaction_date')
+            // ->add('transaction_date')
             ->add('user', EntityType::class, [
                 'class' => User::class,
 'choice_label' => 'username',

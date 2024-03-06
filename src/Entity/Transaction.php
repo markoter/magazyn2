@@ -49,6 +49,9 @@ class Transaction
     public function __construct()
     {
         $this->invoices = new ArrayCollection();
+        if ($this->transaction_date === null) {
+            $this->transaction_date = new \DateTime();
+        }
     }
 
     public function getId(): ?int
@@ -110,11 +113,11 @@ class Transaction
     }
 
     public function setTransactionDate(?\DateTimeInterface $transaction_date): static
-    {
-        $this->transaction_date = $transaction_date;
+{
+    $this->transaction_date = $transaction_date;
 
-        return $this;
-    }
+    return $this;
+}
 
     public function getUser(): ?User
     {
