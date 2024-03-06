@@ -7,6 +7,7 @@ use App\Entity\Warehouse;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,15 +19,18 @@ class UserType extends AbstractType
             ->add('username')
             ->add('roles', ChoiceType::class, [
                 'choices' => [
-                    // 'User' => 'ROLE_USER',
                     'Admin' => 'ROLE_ADMIN',
                 ],
                 'expanded' => true,
                 'multiple' => true,
                 'required' => true,
             ])
-
-            ->add('password')
+            // Replace 'password' field with 'plainPassword'
+            ->add('plainPassword', PasswordType::class, [
+                'mapped' => false,
+                'required' => false, // Adjust as necessary
+                'label' => 'Password (leave blank if not changing)',
+            ])
             ->add('warehouses', EntityType::class, [
                 'class' => Warehouse::class,
                 'choice_label' => 'name',
