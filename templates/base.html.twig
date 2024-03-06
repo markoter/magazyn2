@@ -18,10 +18,11 @@
         <div>
         {% if app.user %}
             Logged in as: {{ app.user.username }}
+            <a href="{{ path('app_logout') }}" style="color: #fff; margin-left: 20px;">Logout</a>
         {% else %}
-            Not logged in.
+            <a href="{{ path('app_login') }}" style="color: #fff;">Login</a>
         {% endif %}
-    </div>
+        </div>
     </header>
 
     <div class="container">
