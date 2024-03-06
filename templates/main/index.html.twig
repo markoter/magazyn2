@@ -21,7 +21,9 @@
 <div class="example-wrapper">
     <h1>
         {% if app.user %}
-            Hello {% if is_granted('ROLE_ADMIN') %}🫡 admin {% endif %}{{ app.user.username }}! 😇
+            Hello {% if is_granted('ROLE_ADMIN') %} admin {{ app.user.username }}! 🫡 
+                    {% else %} {{ app.user.username }}! 😇
+                 {% endif %} 
         {% else %}
             Hello Stranger!
         {% endif %}
