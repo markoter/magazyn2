@@ -23,15 +23,15 @@ class TransactionType extends AbstractType
             ->add('transaction_date')
             ->add('user', EntityType::class, [
                 'class' => User::class,
-'choice_label' => 'id',
+'choice_label' => 'username',
             ])
             ->add('warehouse', EntityType::class, [
                 'class' => Warehouse::class,
-'choice_label' => 'id',
+'choice_label' => 'name',
             ])
             ->add('article', EntityType::class, [
                 'class' => Article::class,
-'choice_label' => 'id',
+'choice_label' => 'name',
             ])
         ;
     }
