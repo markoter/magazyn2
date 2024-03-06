@@ -19,6 +19,7 @@ class WarehouseType extends AbstractType
                 'class' => User::class,
 'choice_label' => 'id',
 'multiple' => true,
+'required' => false,
             ])
         ;
     }
