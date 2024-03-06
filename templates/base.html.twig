@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome to My App{% endblock %}</title>
-    <link rel="icon" href="/path/to/favicon.ico">
+    <link rel="icon" href="/ware.ico">
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
         header { background: #007bff; color: #ffffff; padding: 10px 20px; text-align: center; }
@@ -22,7 +22,7 @@
         </h1>
         <div>
         {% if app.user %}
-            Logged in as: {{ app.user.username }}
+            Logged in as: {{ app.user.username }} {% if is_granted('ROLE_ADMIN') %}🫡 {% endif %}
             <a href="{{ path('app_logout') }}" style="color: #fff; margin-left: 20px;">Logout</a>
         {% else %}
             <a href="{{ path('app_login') }}" style="color: #fff;">Login</a>
