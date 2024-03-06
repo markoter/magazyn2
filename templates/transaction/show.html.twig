@@ -8,6 +8,10 @@
     <table class="table">
         <tbody>
             <tr>
+                <th>Type</th>
+                <td>{{ transaction.isIn ? 'In' : 'Out' }}</td>
+            </tr>
+            <tr>
                 <th>Id</th>
                 <td>{{ transaction.id }}</td>
             </tr>
@@ -15,10 +19,7 @@
                 <th>Quantity</th>
                 <td>{{ transaction.quantity }}</td>
             </tr>
-            <tr>
-                <th>Is_in</th>
-                <td>{{ transaction.isIn ? 'Yes' : 'No' }}</td>
-            </tr>
+            
             <tr>
                 <th>Vat</th>
                 <td>{{ transaction.vat }}</td>
@@ -30,6 +31,10 @@
             <tr>
                 <th>Transaction_date</th>
                 <td>{{ transaction.transactionDate ? transaction.transactionDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ transaction.user.username }}</td>
             </tr>
         </tbody>
     </table>

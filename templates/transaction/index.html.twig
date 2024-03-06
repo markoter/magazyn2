@@ -21,7 +21,7 @@
         <tbody>
         {% for transaction in transactions %}
             <tr>
-                <td>{{ transaction.isIn ? 'incomming' : 'outgoing' }}</td>
+                <td>{{ transaction.isIn ? 'In' : 'Out' }}</td>
                 <td>{{ transaction.id }}</td>
                 <td>{{ transaction.quantity }}</td>
                 <td>{{ transaction.vat }}</td>
