@@ -19,7 +19,7 @@ class UserType extends AbstractType
             ->add('is_admin')
             ->add('warehouses', EntityType::class, [
                 'class' => Warehouse::class,
-'choice_label' => 'id',
+'choice_label' => 'name',
 'multiple' => true,
 'required' => false,
             ])

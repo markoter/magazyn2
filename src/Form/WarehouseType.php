@@ -17,7 +17,7 @@ class WarehouseType extends AbstractType
             ->add('name')
             ->add('users', EntityType::class, [
                 'class' => User::class,
-'choice_label' => 'id',
+'choice_label' => 'login',
 'multiple' => true,
 'required' => false,
             ])
