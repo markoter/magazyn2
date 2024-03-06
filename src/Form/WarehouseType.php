@@ -17,11 +17,10 @@ class WarehouseType extends AbstractType
             ->add('name')
             ->add('users', EntityType::class, [
                 'class' => User::class,
-'choice_label' => 'username',
-'multiple' => true,
-'required' => false,
-            ])
-        ;
+                'choice_label' => 'username',
+                'multiple' => true,
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
