@@ -15,6 +15,14 @@
 <body>
     <header>
         <h1>{% block header %}My App{% endblock %}</h1>
+        <div>
+        {% if app.user %}
+            Logged in as: {{ app.user.username }}
+            <a href="{{ path('app_logout') }}" style="color: #fff; margin-left: 20px;">Logout</a>
+        {% else %}
+            <a href="{{ path('app_login') }}" style="color: #fff;">Login</a>
+        {% endif %}
+        </div>
     </header>
 
     <div class="container">
