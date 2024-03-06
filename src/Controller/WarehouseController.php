@@ -10,15 +10,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\UserRepository;
 
 #[Route('/warehouse')]
 class WarehouseController extends AbstractController
 {
     #[Route('/', name: 'app_warehouse_index', methods: ['GET'])]
-    public function index(WarehouseRepository $warehouseRepository): Response
+    public function index(WarehouseRepository $warehouseRepository, UserRepository $userRepository): Response
     {
+        $user = $this->getUser();
+
+        if($this->isGranted('ROLE_ADMIN')) {
+            $warehouses = $warehouseRepository->findAll();
+        }
+        else {
+            $warehouses = $userRepository->findWarehousesByUser($user);
+        }
+
+
+        // dump($warehouses); // Add this line before the render method call
         return $this->render('warehouse/index.html.twig', [
-            'warehouses' => $warehouseRepository->findAll(),
+            'warehouses' => $warehouses,
         ]);
     }
 
