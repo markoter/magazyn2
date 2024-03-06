@@ -89,7 +89,7 @@ class Warehouse
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
-            $user->addWarehouse($this);
+            // $user->addWarehouse($this);
         }
 
         return $this;
