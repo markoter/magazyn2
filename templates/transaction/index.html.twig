@@ -9,11 +9,11 @@
         <thead>
             <tr>
                 <th>Type</th>
-                <th>Id</th>
+                <th>Article</th>
                 <th>Quantity</th>
                 <th>Vat</th>
-                <th>Unit_price</th>
-                <th>Transaction_date</th>
+                <th>Price_per_unit</th>
+                <th>Transaction_Date</th>
                 <th>User</th>
                 <th>actions</th>
             </tr>
@@ -22,7 +22,7 @@
         {% for transaction in transactions %}
             <tr>
                 <td>{{ transaction.isIn ? 'In' : 'Out' }}</td>
-                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.article.name}}</td>
                 <td>{{ transaction.quantity }}</td>
                 <td>{{ transaction.vat }}</td>
                 <td>{{ transaction.unitPrice }}</td>
