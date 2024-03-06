@@ -16,6 +16,14 @@
         <li>Your controller at <code>/home/markoter/dev/learning/php/symfony/magazyn2/src/Controller/MainController.php</code></li>
         <li>Your template at <code>/home/markoter/dev/learning/php/symfony/magazyn2/templates/main/index.html.twig</code></li>
         <li>Tu coś napisałem </li>
+        {% if is_granted('ROLE_USER') %}
+            <li><a href="{{ path('app_warehouse_index') }}">Warehouses</a></li>
+            <li><a href="{{ path('app_transaction_index') }}">Transactions</a></li>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('app_article_index') }}">Articles</a></li>
+            <li><a href="{{ path('app_user_index') }}">Users</a></li>
+        {% endif %}
     </ul>
 </div>
 {% endblock %}
