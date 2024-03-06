@@ -21,10 +21,10 @@ class TransactionType extends AbstractType
             ->add('vat')
             ->add('unit_price')
             // ->add('transaction_date')
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'username',
-            ])
+//             ->add('user', EntityType::class, [
+//                 'class' => User::class,
+// 'choice_label' => 'username',
+//             ])
             ->add('warehouse', EntityType::class, [
                 'class' => Warehouse::class,
 'choice_label' => 'name',
