@@ -29,14 +29,16 @@
         {% endif %}
     </h1>
     <ul>
-        {% if is_granted('ROLE_USER') %}
+        {% if is_granted('ROLE_ADMIN') %}
             <li><a href="{{ path('app_warehouse_index') }}">Warehouses</a></li>
             <li><a href="{{ path('app_transaction_index') }}">Transactions</a></li>
-        {% endif %}
-        {% if is_granted('ROLE_ADMIN') %}
             <li><a href="{{ path('app_article_index') }}">Articles</a></li>
             <li><a href="{{ path('app_user_index') }}">Users</a></li>
+        {% elseif is_granted('ROLE_USER') %}
+            <li><a href="{{ path('app_warehouse_index') }}">My Warehouses</a></li>
+            <li><a href="{{ path('app_transaction_index') }}">My Transactions</a></li>
         {% endif %}
+        
     </ul>
 </div>
 {% endblock %}
