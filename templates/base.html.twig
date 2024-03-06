@@ -15,6 +15,13 @@
 <body>
     <header>
         <h1>{% block header %}My App{% endblock %}</h1>
+        <div>
+        {% if app.user %}
+            Logged in as: {{ app.user.username }}
+        {% else %}
+            Not logged in.
+        {% endif %}
+    </div>
     </header>
 
     <div class="container">
