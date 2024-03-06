@@ -38,7 +38,10 @@ class TransactionController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager, bool $is_in): Response
     {
         $transaction = new Transaction();
-        $form = $this->createForm(TransactionType::class, $transaction);
+        $transaction->setIsIn($is_in);
+        $form = $this->createForm(TransactionType::class, $transaction, [
+            'is_in' => $is_in,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -54,6 +57,7 @@ class TransactionController extends AbstractController
         return $this->render('transaction/new.html.twig', [
             'transaction' => $transaction,
             'form' => $form,
+            'transactionType'=> $is_in ? 'Incoming' : 'Outgoing',
         ]);
     }
 
