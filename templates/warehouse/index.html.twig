@@ -28,7 +28,9 @@
                 </td>
                 <td>
                     <a href="{{ path('app_warehouse_show', {'id': warehouse.id}) }}">show</a>
-                    <a href="{{ path('app_warehouse_edit', {'id': warehouse.id}) }}">edit</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_warehouse_edit', {'id': warehouse.id}) }}">edit</a>
+                    {% endif %} 
                 </td>
             </tr>
         {% else %}
