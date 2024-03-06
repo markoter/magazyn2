@@ -30,7 +30,9 @@
                 <td>{{ transaction.user.username }}</td>
                 <td>
                     <a href="{{ path('app_transaction_show', {'id': transaction.id}) }}">show</a>
-                    <a href="{{ path('app_transaction_edit', {'id': transaction.id}) }}">edit</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_transaction_edit', {'id': transaction.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
